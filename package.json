@@ -11,7 +11,7 @@
   "dependencies": {
     "solid-js": "^1.8.22",
     "@solidjs/router": "^0.8.4",
-    "@sentry/browser": "^7.64.0"
+    "@sentry/browser": "^8.35.0"
   },
   "devDependencies": {
     "vite": "^5.4.7",
