@@ -21,7 +21,7 @@ function StationItem(props) {
       />
       <div>
         <p class="font-semibold text-lg text-green-600">{props.station.name}</p>
-        <p class="text-gray-500 text-sm">{props.station.country}</p>
+        <p class="text-gray-600 text-sm">{props.station.country}</p>
       </div>
     </div>
   );

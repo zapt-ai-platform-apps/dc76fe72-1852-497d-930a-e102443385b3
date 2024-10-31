@@ -1,4 +1,4 @@
-import { createSignal, createEffect, For } from 'solid-js';
+import { createSignal, createEffect, For, Show } from 'solid-js';
 
 function CategorySelector(props) {
   const [categories, setCategories] = createSignal([]);
@@ -74,12 +74,12 @@ function CategorySelector(props) {
           )}
         </For>
       </select>
-      {loadingCategories() && (
+      <Show when={loadingCategories()}>
         <div class="mt-2 text-gray-600">جارٍ تحميل قائمة التصنيفات...</div>
-      )}
-      {!props.selectedCountry() && (
+      </Show>
+      <Show when={!props.selectedCountry()}>
         <div class="mt-2 text-red-600">يرجى اختيار بلد أولاً لعرض التصنيفات المتاحة.</div>
-      )}
+      </Show>
     </div>
   );
 }

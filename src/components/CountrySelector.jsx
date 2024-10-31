@@ -1,4 +1,4 @@
-import { createSignal, onMount, For } from 'solid-js';
+import { createSignal, onMount, For, Show } from 'solid-js';
 
 function CountrySelector(props) {
   const [countries, setCountries] = createSignal([]);
@@ -39,9 +39,9 @@ function CountrySelector(props) {
           )}
         </For>
       </select>
-      {loadingCountries() && (
+      <Show when={loadingCountries()}>
         <div class="mt-2 text-gray-600">جارٍ تحميل قائمة البلدان...</div>
-      )}
+      </Show>
     </div>
   );
 }

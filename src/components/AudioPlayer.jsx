@@ -80,7 +80,7 @@ function AudioPlayer(props) {
         </button>
         <div class="flex-1">
           <p class="text-gray-800 font-semibold">{props.currentStation().name}</p>
-          <p class="text-gray-500 text-sm">{props.currentStation().country}</p>
+          <p class="text-gray-600 text-sm">{props.currentStation().country}</p>
         </div>
         <div class="flex items-center">
           <label for="volume-control" class="sr-only">التحكم في مستوى الصوت</label>

@@ -1,4 +1,4 @@
-import { createSignal, createEffect, onCleanup } from 'solid-js';
+import { createSignal, createEffect } from 'solid-js';
 import StationList from './components/StationList';
 import Spinner from './components/Spinner';
 import CountrySelector from './components/CountrySelector';
@@ -79,11 +79,11 @@ function App() {
   });
 
   return (
-    <div class="h-full bg-gradient-to-b from-green-100 to-blue-100 p-4">
+    <div class="min-h-screen bg-gradient-to-b from-green-100 to-blue-100 p-4">
       <div class="h-full max-w-6xl mx-auto flex flex-col text-gray-800">
         <header class="text-center mb-8">
           <h1 class="text-4xl font-bold text-green-600">تطبيق الراديو العالمي للمكفوفين</h1>
-          <p class="text-gray-600">استمع إلى محطات الراديو العالمية مع تحكم كامل وسهولة الوصول</p>
+          <p class="text-gray-700">استمع إلى محطات الراديو العالمية مع تحكم كامل وسهولة الوصول</p>
         </header>
         <CountrySelector
           selectedCountry={selectedCountry}
@@ -103,6 +103,7 @@ function App() {
             value={searchTerm()}
             onInput={(e) => setSearchTerm(e.target.value)}
             class="w-full p-3 border border-gray-300 rounded-lg box-border focus:outline-none focus:ring-2 focus:ring-green-400 focus:border-transparent text-gray-800"
+            aria-label="بحث عن محطة"
           />
         </div>
         {loadingStations() ? (
