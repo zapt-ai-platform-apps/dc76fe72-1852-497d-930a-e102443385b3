@@ -1,26 +1,58 @@
-import { createSignal, onMount, For } from 'solid-js';
+import { createSignal, createEffect, For } from 'solid-js';
 
 function CategorySelector(props) {
   const [categories, setCategories] = createSignal([]);
   const [loadingCategories, setLoadingCategories] = createSignal(false);
 
-  const fetchCategories = async () => {
+  const fetchCategories = async (country) => {
     setLoadingCategories(true);
     try {
-      const response = await fetch('https://de1.api.radio-browser.info/json/tags');
+      const response = await fetch(`https://de1.api.radio-browser.info/json/stations/bycountry/${encodeURIComponent(country)}`);
       const data = await response.json();
-      // Sort categories by name
-      data.sort((a, b) => a.name.localeCompare(b.name));
-      setCategories(data);
+
+      // Extract tags from stations
+      const tagsMap = {};
+      data.forEach(station => {
+        if (station.tags) {
+          const tags = station.tags.split(',');
+          tags.forEach(tag => {
+            tag = tag.trim();
+            if (tag) {
+              if (!tagsMap[tag]) {
+                tagsMap[tag] = 1;
+              } else {
+                tagsMap[tag] += 1;
+              }
+            }
+          });
+        }
+      });
+
+      // Convert tagsMap to array and sort
+      const tagsArray = Object.keys(tagsMap).map(tagName => ({
+        name: tagName,
+        stationcount: tagsMap[tagName],
+      }));
+
+      tagsArray.sort((a, b) => a.name.localeCompare(b.name));
+
+      setCategories(tagsArray);
     } catch (error) {
       console.error('Error fetching categories:', error);
+      setCategories([]);
     } finally {
       setLoadingCategories(false);
     }
   };
 
-  onMount(() => {
-    fetchCategories();
+  createEffect(() => {
+    const country = props.selectedCountry();
+    if (country) {
+      fetchCategories(country);
+    } else {
+      // If no country selected, clear categories
+      setCategories([]);
+    }
   });
 
   return (
@@ -31,6 +63,7 @@ function CategorySelector(props) {
         class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400 focus:border-transparent cursor-pointer box-border text-gray-800"
         value={props.selectedCategory()}
         onChange={(e) => props.setSelectedCategory(e.target.value)}
+        disabled={!props.selectedCountry()}
       >
         <option value="">جميع التصنيفات</option>
         <For each={categories()}>
@@ -43,6 +76,9 @@ function CategorySelector(props) {
       </select>
       {loadingCategories() && (
         <div class="mt-2 text-gray-600">جارٍ تحميل قائمة التصنيفات...</div>
+      )}
+      {!props.selectedCountry() && (
+        <div class="mt-2 text-red-600">يرجى اختيار بلد أولاً لعرض التصنيفات المتاحة.</div>
       )}
     </div>
   );

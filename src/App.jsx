@@ -1,4 +1,4 @@
-import { createSignal, onMount, createEffect } from 'solid-js';
+import { createSignal, createEffect } from 'solid-js';
 import StationList from './components/StationList';
 import StationPlayer from './components/StationPlayer';
 import Spinner from './components/Spinner';
@@ -56,6 +56,12 @@ function App() {
     fetchStations();
   });
 
+  // Reset selectedCategory when selectedCountry changes
+  createEffect(() => {
+    const country = selectedCountry();
+    setSelectedCategory('');
+  });
+
   const handleSelectStation = (station) => {
     setSelectedStation(station);
   };
@@ -77,6 +83,7 @@ function App() {
         <CategorySelector
           selectedCategory={selectedCategory}
           setSelectedCategory={setSelectedCategory}
+          selectedCountry={selectedCountry}
         />
         <div class="mb-4">
           <input
