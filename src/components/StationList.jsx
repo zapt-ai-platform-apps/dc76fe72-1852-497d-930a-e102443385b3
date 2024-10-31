@@ -14,10 +14,7 @@ function StationList(props) {
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <For each={filteredStations()}>
           {(station) => (
-            <StationItem
-              station={station}
-              onSelect={() => props.onSelectStation(station)}
-            />
+            <StationItem station={station} />
           )}
         </For>
       </div>

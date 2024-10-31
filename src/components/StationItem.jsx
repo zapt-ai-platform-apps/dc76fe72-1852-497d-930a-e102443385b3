@@ -1,8 +1,12 @@
 function StationItem(props) {
+  const handleOpenStation = () => {
+    window.open(props.station.url_resolved, '_blank');
+  };
+
   return (
     <div
       class="bg-white p-4 rounded-lg shadow-md flex items-center cursor-pointer hover:bg-green-50 transition duration-300"
-      onClick={props.onSelect}
+      onClick={handleOpenStation}
     >
       <img
         src={props.station.favicon || 'https://via.placeholder.com/50'}

@@ -50,7 +50,6 @@ function CategorySelector(props) {
     if (country) {
       fetchCategories(country);
     } else {
-      // If no country selected, clear categories
       setCategories([]);
     }
   });
