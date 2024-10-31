@@ -27,7 +27,7 @@ function CountrySelector(props) {
       <label for="country-selector" class="block text-gray-700 font-semibold mb-2">اختر البلد:</label>
       <select
         id="country-selector"
-        class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400 focus:border-transparent cursor-pointer box-border"
+        class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400 focus:border-transparent cursor-pointer box-border text-gray-800"
         value={props.selectedCountry()}
         onChange={(e) => props.setSelectedCountry(e.target.value)}
       >
