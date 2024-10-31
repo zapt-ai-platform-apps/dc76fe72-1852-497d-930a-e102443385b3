@@ -1,7 +1,7 @@
 {
   "name": "new-app",
   "version": "1.0.0",
-  "description": "An app for listening to Arabic radio stations",
+  "description": "An app for listening to global radio stations",
   "type": "module",
   "scripts": {
     "dev": "vite",

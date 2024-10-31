@@ -24,13 +24,13 @@ function App() {
       const data = await response.json();
 
       // Filter out Islamic stations
-      const excludedKeywords = ['islam', 'quran', 'koran', 'muslim', 'islamic', 'قرآن', 'إسلام', 'مسلم'];
       const filteredData = data.filter(station => {
-        const tags = station.tags.toLowerCase();
-        const name = station.name.toLowerCase();
-        return !excludedKeywords.some(keyword =>
-          tags.includes(keyword.toLowerCase()) || name.includes(keyword.toLowerCase())
-        );
+        const tags = station.tags ? station.tags.toLowerCase() : '';
+        const name = station.name ? station.name.toLowerCase() : '';
+        // List of keywords to filter out
+        const excludeKeywords = ['islam', 'islamic', 'muslim', 'quran', 'hadith', 'azan', 'adzan', 'qur\'an', 'koran'];
+        // Return true if none of the keywords are in the tags or name
+        return !excludeKeywords.some(keyword => tags.includes(keyword) || name.includes(keyword));
       });
 
       setStations(filteredData);
@@ -46,7 +46,6 @@ function App() {
   });
 
   createEffect(() => {
-    selectedCountry(); // Depend on selectedCountry
     fetchStations();
   });
 
@@ -59,7 +58,7 @@ function App() {
   };
 
   return (
-    <div class="min-h-screen bg-gradient-to-b from-green-100 to-blue-100 p-4 text-gray-800">
+    <div class="min-h-screen bg-gradient-to-b from-green-100 to-blue-100 p-4">
       <div class="h-full max-w-6xl mx-auto flex flex-col">
         <header class="text-center mb-8">
           <h1 class="text-4xl font-bold text-green-600">تطبيق الراديو العالمي</h1>
