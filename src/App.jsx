@@ -45,7 +45,19 @@ function App() {
         return !excludeKeywords.some(keyword => tags.includes(keyword) || name.includes(keyword));
       });
 
-      setStations(filteredData);
+      // Remove stations with duplicate names
+      const uniqueStationsMap = {};
+      filteredData.forEach(station => {
+        // Use station name as the key
+        const stationName = station.name.trim().toLowerCase();
+        if (!uniqueStationsMap[stationName]) {
+          uniqueStationsMap[stationName] = station;
+        }
+      });
+
+      const uniqueStations = Object.values(uniqueStationsMap);
+
+      setStations(uniqueStations);
     } catch (error) {
       console.error('Error fetching stations:', error);
     } finally {

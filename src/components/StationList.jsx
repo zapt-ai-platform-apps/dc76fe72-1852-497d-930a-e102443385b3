@@ -3,8 +3,9 @@ import StationItem from './StationItem';
 
 function StationList(props) {
   const filteredStations = () => {
+    const searchTermLower = props.searchTerm().toLowerCase();
     return props.stations().filter(station =>
-      station.name.toLowerCase().includes(props.searchTerm().toLowerCase())
+      station.name.toLowerCase().includes(searchTermLower)
     );
   };
 
