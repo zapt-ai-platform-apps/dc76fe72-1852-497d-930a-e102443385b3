@@ -34,11 +34,14 @@ function App() {
       const response = await fetch(url);
       const data = await response.json();
 
-      // Filter out Islamic stations
+      // Filter out Islamic stations and Quran reciters
       const filteredData = data.filter(station => {
         const tags = station.tags ? station.tags.toLowerCase() : '';
         const name = station.name ? station.name.toLowerCase() : '';
-        const excludeKeywords = ['islam', 'islamic', 'muslim', 'quran', 'hadith', 'azan', 'adzan', 'qur\'an', 'koran'];
+        const excludeKeywords = [
+          'islam', 'islamic', 'muslim', 'quran', 'kur\'an', 'kuran', 'hadith', 'azan', 'adzan', 'qur\'an', 'koran', 'surah', 'sura', 'sheikh', 'sheik', 'tilawah', 'tilawat', 'recitation', 'reciter', 'qari', 'qur\'a', 'hafiz', 'muezzin', 'imam', 'adhan', 'tajwid', 'tajweed',
+          'قران', 'قرآن', 'القرآن', 'القران', 'قراءة', 'قراء', 'قرّاء', 'قارئ', 'تلاوة', 'تلاوات', 'الشيخ', 'شيخ', 'سورة', 'سور', 'المصحف', 'الأذان', 'اذان', 'الأذان', 'إمام', 'تجويد', 'الحافظ'
+        ];
         return !excludeKeywords.some(keyword => tags.includes(keyword) || name.includes(keyword));
       });
 
@@ -58,7 +61,7 @@ function App() {
 
   // Reset selectedCategory when selectedCountry changes
   createEffect(() => {
-    const country = selectedCountry();
+    selectedCountry();
     setSelectedCategory('');
   });
 
@@ -71,7 +74,7 @@ function App() {
   };
 
   return (
-    <div class="h-full bg-gradient-to-b from-green-100 to-blue-100 p-4">
+    <div class="min-h-screen bg-gradient-to-b from-green-100 to-blue-100 p-4">
       <div class="h-full max-w-6xl mx-auto flex flex-col">
         <header class="text-center mb-8">
           <h1 class="text-4xl font-bold text-green-600">تطبيق الراديو العالمي</h1>
