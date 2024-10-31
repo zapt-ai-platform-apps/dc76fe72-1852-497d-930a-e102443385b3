@@ -30,6 +30,7 @@ function CountrySelector(props) {
         class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400 focus:border-transparent cursor-pointer box-border text-gray-800"
         value={props.selectedCountry()}
         onChange={(e) => props.setSelectedCountry(e.target.value)}
+        aria-label="اختر البلد"
       >
         <option value="">جميع البلدان</option>
         <For each={countries()}>

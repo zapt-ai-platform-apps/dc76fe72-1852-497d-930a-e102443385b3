@@ -63,6 +63,7 @@ function CategorySelector(props) {
         value={props.selectedCategory()}
         onChange={(e) => props.setSelectedCategory(e.target.value)}
         disabled={!props.selectedCountry()}
+        aria-label="اختر التصنيف"
       >
         <option value="">جميع التصنيفات</option>
         <For each={categories()}>

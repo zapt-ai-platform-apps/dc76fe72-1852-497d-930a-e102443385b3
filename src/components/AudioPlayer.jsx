@@ -48,10 +48,11 @@ function AudioPlayer(props) {
 
   return (
     <Show when={props.currentStation()}>
-      <div class="fixed bottom-0 left-0 right-0 bg-white shadow-md p-4 flex items-center">
+      <div class="fixed bottom-0 left-0 right-0 bg-white shadow-md p-4 flex items-center" role="contentinfo" aria-label={`مشغل صوت للمحطة ${props.currentStation().name}`}>
         <button
           class="text-green-600 focus:outline-none mr-4 cursor-pointer"
           onClick={togglePlay}
+          aria-label={props.isPlaying() ? 'إيقاف' : 'تشغيل'}
         >
           {props.isPlaying() ? (
             <svg
@@ -60,6 +61,7 @@ function AudioPlayer(props) {
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
+              aria-hidden="true"
             >
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 9v6m4-6v6m-7 4h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2z" />
             </svg>
@@ -70,6 +72,7 @@ function AudioPlayer(props) {
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
+              aria-hidden="true"
             >
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-5.197-3.03A1 1 0 008 8.999v6.002a1 1 0 001.555.832l5.197-3.03a1 1 0 000-1.664z" />
             </svg>
@@ -80,7 +83,9 @@ function AudioPlayer(props) {
           <p class="text-gray-500 text-sm">{props.currentStation().country}</p>
         </div>
         <div class="flex items-center">
+          <label for="volume-control" class="sr-only">التحكم في مستوى الصوت</label>
           <input
+            id="volume-control"
             type="range"
             min="0"
             max="1"
@@ -88,6 +93,7 @@ function AudioPlayer(props) {
             value={props.volume()}
             onInput={handleVolumeChange}
             class="cursor-pointer"
+            aria-label="مستوى الصوت"
           />
         </div>
         <audio ref={audioRef} />

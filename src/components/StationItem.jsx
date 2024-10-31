@@ -8,10 +8,15 @@ function StationItem(props) {
     <div
       class="bg-white p-4 rounded-lg shadow-md flex items-center cursor-pointer hover:bg-green-50 transition duration-300"
       onClick={handleSelectStation}
+      tabindex="0"
+      role="button"
+      aria-pressed="false"
+      onKeyDown={(e) => { if (e.key === 'Enter') handleSelectStation(); }}
+      aria-label={`محطة ${props.station.name}`}
     >
       <img
         src={props.station.favicon || 'https://via.placeholder.com/50'}
-        alt={props.station.name}
+        alt={`شعار ${props.station.name}`}
         class="w-12 h-12 rounded-full mr-4"
       />
       <div>

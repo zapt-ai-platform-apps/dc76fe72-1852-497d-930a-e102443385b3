@@ -1,7 +1,7 @@
 {
-  "name": "new-app",
+  "name": "radio-for-the-blind",
   "version": "1.0.0",
-  "description": "An app for listening to global radio stations",
+  "description": "تطبيق راديو مخصص للأشخاص المكفوفين",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -11,7 +11,8 @@
   "dependencies": {
     "solid-js": "^1.8.22",
     "@solidjs/router": "^0.8.4",
-    "@sentry/browser": "^8.35.0"
+    "@sentry/browser": "^8.35.0",
+    "solid-markdown": "^2.0.13"
   },
   "devDependencies": {
     "vite": "^5.4.7",
