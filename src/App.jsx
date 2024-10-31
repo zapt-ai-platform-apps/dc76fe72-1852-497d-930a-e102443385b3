@@ -1,8 +1,9 @@
-import { createSignal, createEffect } from 'solid-js';
+import { createSignal, createEffect, onCleanup } from 'solid-js';
 import StationList from './components/StationList';
 import Spinner from './components/Spinner';
 import CountrySelector from './components/CountrySelector';
 import CategorySelector from './components/CategorySelector';
+import AudioPlayer from './components/AudioPlayer';
 
 function App() {
   const [stations, setStations] = createSignal([]);
@@ -10,6 +11,9 @@ function App() {
   const [searchTerm, setSearchTerm] = createSignal('');
   const [selectedCountry, setSelectedCountry] = createSignal('');
   const [selectedCategory, setSelectedCategory] = createSignal('');
+  const [currentStation, setCurrentStation] = createSignal(null);
+  const [isPlaying, setIsPlaying] = createSignal(false);
+  const [volume, setVolume] = createSignal(1);
 
   const fetchStations = async () => {
     setLoadingStations(true);
@@ -79,6 +83,7 @@ function App() {
       <div class="h-full max-w-6xl mx-auto flex flex-col text-gray-800">
         <header class="text-center mb-8">
           <h1 class="text-4xl font-bold text-green-600">تطبيق الراديو العالمي</h1>
+          <p class="text-gray-600">استمع إلى محطات الراديو العالمية مع تحكم كامل</p>
         </header>
         <CountrySelector
           selectedCountry={selectedCountry}
@@ -106,8 +111,17 @@ function App() {
           <StationList
             stations={stations}
             searchTerm={searchTerm}
+            setCurrentStation={setCurrentStation}
+            setIsPlaying={setIsPlaying}
           />
         )}
+        <AudioPlayer
+          currentStation={currentStation}
+          isPlaying={isPlaying}
+          setIsPlaying={setIsPlaying}
+          volume={volume}
+          setVolume={setVolume}
+        />
       </div>
     </div>
   );
