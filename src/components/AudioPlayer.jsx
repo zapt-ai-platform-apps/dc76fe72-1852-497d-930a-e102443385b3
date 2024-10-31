@@ -96,7 +96,7 @@ function AudioPlayer(props) {
             aria-label="مستوى الصوت"
           />
         </div>
-        <audio ref={audioRef} />
+        <audio ref={el => audioRef = el} />
       </div>
     </Show>
   );

@@ -79,7 +79,7 @@ function App() {
   });
 
   return (
-    <div class="min-h-screen bg-gradient-to-b from-green-100 to-blue-100 p-4">
+    <div class="h-full bg-gradient-to-b from-green-100 to-blue-100 p-4">
       <div class="h-full max-w-6xl mx-auto flex flex-col text-gray-800">
         <header class="text-center mb-8">
           <h1 class="text-4xl font-bold text-green-600">تطبيق الراديو العالمي للمكفوفين</h1>
